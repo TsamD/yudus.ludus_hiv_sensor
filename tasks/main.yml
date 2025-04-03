@@ -1,2 +1,21 @@
 ---
 # tasks file for yudus.ludus_hiv_sensor
+---
+# tasks/main.yml
+- name: Installer les dépendances
+  apt:
+    name: curl
+    state: present
+    update_cache: yes
+
+- name: Télécharger le capteur HIV
+  get_url:
+    url: http://example.com/hiv_sensor.tar.gz
+    dest: /opt/hiv_sensor.tar.gz
+
+- name: Décompresser le capteur
+  unarchive:
+    src: /opt/hiv_sensor.tar.gz
+    dest: /opt/hiv_sensor/
+    remote_src: yes
+
